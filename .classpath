@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="credit-card-portal/backend/api-gateway/src/main/java"/>
+	<classpathentry kind="src" path="credit-card-portal/backend/api-gateway/src/test/java"/>
+	<classpathentry kind="src" path="credit-card-portal/backend/auth-service/src/main/java"/>
+	<classpathentry kind="src" path="credit-card-portal/backend/auth-service/src/test/java"/>
+	<classpathentry kind="src" path="credit-card-portal/backend/creditcard-service/src/main/java"/>
+	<classpathentry kind="src" path="credit-card-portal/backend/creditcard-service/src/test/java"/>
+	<classpathentry excluding="com/creditcard/customer/config/" kind="src" path="credit-card-portal/backend/customer-service/src/main/java"/>
+	<classpathentry kind="src" path="credit-card-portal/backend/customer-service/src/main/java/com/creditcard/customer/config"/>
+	<classpathentry kind="src" path="credit-card-portal/backend/customer-service/src/test/java"/>
+	<classpathentry kind="src" path="credit-card-portal/backend/customer-service/target/generated-sources/annotations"/>
+	<classpathentry kind="src" path="credit-card-portal/backend/transaction-service/src/main/java"/>
+	<classpathentry kind="src" path="credit-card-portal/backend/transaction-service/src/test/java"/>
+	<classpathentry kind="output" path="credit-card-portal/backend/api-gateway/target/classes"/>
+</classpath>
