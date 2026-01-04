@@ -1,0 +1,43 @@
+name: Build and Deploy to EC2
+
+on:
+  push:
+    branches:
+      - master  # Deploy on pushes to main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: temurin
+        java-version: 17
+
+    - name: Build the project with Maven
+      run: mvn clean package -DskipTests
+
+    - name: Deploy to EC2 server via SSH
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ec2-user
+        key: ${{ secrets.EC2_SSH_KEY }}
+        port: 22
+
+        # Copy the JAR file from runner to remote server
+        source: "target/api-gateway-0.0.1-SNAPSHOT.jar"
+        target: "/home/ec2-user/api-gateway/api-gateway.jar"
+
+        # After copying, restart the app on EC2 server
+        script: |
+          echo "Stopping existing app (if any)..."
+          pkill -f 'java -jar /home/ec2-user/api-gateway/api-gateway.jar' || echo "No app running"
+          echo "Starting app..."
+          nohup java -jar /home/ec2-user/api-gateway/api-gateway.jar > /home/ec2-user/api-gateway/app.log 2>&1 &
+          echo "Deployment complete."
